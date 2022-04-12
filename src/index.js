@@ -11,4 +11,4 @@ root.render(
     <GlobalStyles />
     <App />
   </>
-);
+)
