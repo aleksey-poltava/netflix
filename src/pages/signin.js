@@ -1,9 +1,20 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { useNavigate } from "react-router-dom";
+import { FirebaseContext } from "../context/firebase";
 import { Form } from "../components";
 import { FooterContainer } from "../containers/footer";
 import {HeaderContainer} from "../containers/header";
 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+import * as ROUTES from '../constants/routes';
+
 export default function SignIn() {
+    const history = useNavigate();
+    const auth = getAuth();
+
+    const {firebase} = useContext(FirebaseContext);
+
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -17,7 +28,26 @@ export default function SignIn() {
         event.preventDefault();
 
         // firebase work here
+        signInWithEmailAndPassword(auth, emailAddress, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                history.push(ROUTES.BROWSE);
+            })
+            .catch((error) => {
+                setEmailAddress('');
+                setPassword('');
 
+                console.log(error);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorMessage.includes('user-not-found')) {
+                    setError('No such user or incorrect password.');
+                }
+                else {
+                    setError(errorMessage);
+                }                
+            });
     };
 
     return (
