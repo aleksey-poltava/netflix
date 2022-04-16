@@ -33,6 +33,7 @@ export default function Signup() {
                 history(ROUTES.BROWSE);
             })
             .catch((error) => {
+                setFirstName('');
                 setEmailAddress('');
                 setPassword('');
                 
