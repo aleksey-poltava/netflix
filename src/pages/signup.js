@@ -1,6 +1,5 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { FirebaseContext } from "../context/firebase";
 import { Form } from "../components";
 import { FooterContainer } from "../containers/footer";
 import {HeaderContainer} from "../containers/header";
@@ -12,7 +11,7 @@ import * as ROUTES from '../constants/routes';
 export default function Signup() {
     const history = useNavigate();
     const auth = getAuth();
-    const {firebase} = useContext(FirebaseContext);
+    // const {firebase} = useContext(FirebaseContext);
 
     const [firstName, setFirstName] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
@@ -28,8 +27,9 @@ export default function Signup() {
         createUserWithEmailAndPassword(auth, emailAddress, password)
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
-                
+                //const user = userCredential.user;
+                console.log(userCredential);
+
                 history(ROUTES.BROWSE);
             })
             .catch((error) => {
@@ -38,7 +38,6 @@ export default function Signup() {
                 setPassword('');
                 
                 console.log(error);
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 setError(errorMessage);
                 

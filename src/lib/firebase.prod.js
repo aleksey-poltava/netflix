@@ -1,7 +1,11 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
+import { createContext } from "react";
 
-import { seedDatabase } from '../seed';
+
+
+// import { seedDatabase } from '../seed';
 
 // we need to seed database
 
@@ -25,5 +29,5 @@ console.log(db);
 
 // seedDatabase(db);
 
-export {db};
+export const auth = getAuth(app);
 
