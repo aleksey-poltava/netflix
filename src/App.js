@@ -8,14 +8,15 @@ import { IsUserLoggedIn as IsUserRedirect, ProtectedRoute } from "./helpers/rout
 import { useAuthListener } from "./hooks";
 
 export default function App() {
-  const auth = useAuthListener();
-  console.log(auth);
+  // const auth = useAuthListener();
+  
 
-  const user = {};
+  const {user} = useAuthListener();
+  console.log('user in App:', user);
 
   return (
     <Router> 
-      <Routes>
+      <Routes> 
           <Route
             path={ROUTES.SIGN_IN}
             element={
