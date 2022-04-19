@@ -8,8 +8,6 @@ import { IsUserLoggedIn as IsUserRedirect, ProtectedRoute } from "./helpers/rout
 import { useAuthListener } from "./hooks";
 
 export default function App() {
-  // const auth = useAuthListener();
-  
 
   const {user} = useAuthListener();
   console.log('user in App:', user);
@@ -43,7 +41,8 @@ export default function App() {
             exact
             element={
               <ProtectedRoute
-              authPath={ROUTES.SIGN_IN}
+                user={user}
+                authPath={ROUTES.SIGN_IN}
               >
                 <Browse />
               </ProtectedRoute>

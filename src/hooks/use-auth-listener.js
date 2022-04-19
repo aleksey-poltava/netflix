@@ -1,12 +1,12 @@
-import {useState, useEffect, useContext} from "react";
+import {useState, useEffect} from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { FirebaseContext } from "../context/firebase";
+
 
 
 export default function useAuthListener() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
 
-    const {firebase} = useContext(FirebaseContext);
+    // const {firebase} = useContext(FirebaseContext);
     
     //https://firebase.google.com/docs/auth/web/start
 
@@ -14,7 +14,6 @@ export default function useAuthListener() {
 
 
     useEffect(() => {
-      //const listener = firebase.onAuthStateChanged(auth, (user) => {
         const listener = onAuthStateChanged(auth, (user) => {
             if (user) {
               // User is signed in, see docs for a list of available properties
@@ -26,10 +25,10 @@ export default function useAuthListener() {
               // ...
             } else {
               // User is signed out
-              localStorage.removeItem(' ');
+              localStorage.removeItem('authUser');
               setUser(null);
-              // ...
-                console.log('User sign out');
+
+              console.log('User sign out');
             }
           });
         

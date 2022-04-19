@@ -23,7 +23,7 @@ const app = initializeApp(config);
 
 console.log(app.name);
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 console.log(db);
 
