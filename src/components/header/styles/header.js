@@ -92,6 +92,7 @@ export const SearchIcon = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
 
   img {
     filter: brightness(0) invert(1);

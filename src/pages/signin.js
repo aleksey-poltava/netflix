@@ -1,6 +1,5 @@
 import React, {useState, useContext} from "react";
 import { useNavigate } from "react-router-dom";
-import { FirebaseContext } from "../context/firebase";
 import { Form } from "../components";
 import { FooterContainer } from "../containers/footer";
 import {HeaderContainer} from "../containers/header";
@@ -12,8 +11,6 @@ import * as ROUTES from '../constants/routes';
 export default function SignIn() {
     const history = useNavigate();
     const auth = getAuth();
-
-    const {firebase} = useContext(FirebaseContext);
 
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
