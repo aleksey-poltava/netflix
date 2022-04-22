@@ -5,7 +5,7 @@ import {Accordion, OptForm} from '../components';
 
 export function FaqContainer() {
     return (
-        <Accordion>
+      <Accordion>
         <Accordion.Title>Frequently Asked Questions</Accordion.Title>
           {faqsData.map((item) => (
             <Accordion.Item key={item.id}>
