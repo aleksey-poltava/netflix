@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { SelectProfileContainer } from "./profiles";
+import { FooterContainer } from "./footer";
 import { useAuthListener } from '../hooks';
-import {Card, Header, Loading} from '../components';
+import {Card, Header, Loading, Player} from '../components';
 import * as ROUTES from '../constants/routes';
 import logo from '../logo.svg';
 
@@ -121,15 +122,15 @@ export function BrowseContainer({slides}) {
                   ))}
                 </Card.Entities>
                 <Card.Feature category={category}>
-                  <p>Hello</p>
-                  {/* <Player>
+                  <Player>
                     <Player.Button />
                     <Player.Video src='videos/bunny.mp4' />
-                  </Player> */}
+                  </Player>
                 </Card.Feature>
               </Card>
             ))}
           </Card.Group>
+          <FooterContainer />
         </>
       ) : (
         <SelectProfileContainer user={user} setProfile={setProfileFunction} />

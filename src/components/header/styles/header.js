@@ -132,7 +132,7 @@ export const Dropdown = styled.div`
   position: absolute;
   background-color: black;
   padding: 10px;
-  width: 100px;
+  width: 170px;
   top: 32px;
   right: 10px;
 
@@ -153,6 +153,8 @@ export const Dropdown = styled.div`
 
     ${Picture} {
       cursor: default;
+      background-size: contain;
+      background-repeat: no-repeat;      
     }
   }
 
