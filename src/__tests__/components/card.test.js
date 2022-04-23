@@ -1,6 +1,7 @@
 import React from "react";
 import {render, fireEvent} from '@testing-library/react';
 import {Card, Player} from '../../components';
+import { getByText } from "@testing-library/react";
 
 const category = 'series';
 const slideRows = [
@@ -74,14 +75,18 @@ const slideRows = [
       });
 
       it('renders the <Card /> and toggles the card feature', () => {
-        const {container, queryByText, getByTestId} = render(
+        const {container, queryByText, getByTestId, getByAltText} = render(
           <Card.Group>
           {slideRows.map((slideItem) => (
             <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
               <Card.Title>{slideItem.title}</Card.Title>
               <Card.Entities>
                 {slideItem.data.map((item) => (
-                  <Card.Item key={item.docId} item={item}>
+                  <Card.Item 
+                    key={item.docId}
+                     item={item} 
+                     data-testid={`${item.slug}-item-feature`}
+                  >
                     <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`} />
                     <Card.Meta>
                       <Card.SubTitle>{item.title}</Card.SubTitle>
@@ -101,9 +106,19 @@ const slideRows = [
         </Card.Group>
         );
 
-        expect(queryByText('18')).toBeTruthy();
+        expect(queryByText('18')).toBeFalsy();
         fireEvent.click(getByTestId('tiger-king-item-feature'));
+        expect(queryByText ('18')).toBeTruthy();
         
-    //    expect(container.firstChild).toMatchSnapshot();
+        fireEvent.click(getByAltText('Close'));
+        expect(queryByText('18')).toBeFalsy();
+ 
+        expect(queryByText('PG')).toBeFalsy();
+        fireEvent.click(getByTestId('juno-item-feature'));
+        expect(queryByText('PG')).toBeTruthy();
+        fireEvent.click(getByAltText('Close'));
+        expect(queryByText('PG')).toBeFalsy();
+
+        expect(container.firstChild).toMatchSnapshot();
     });
   })
